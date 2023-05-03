@@ -18,19 +18,52 @@ local function getcustomassetfunc(file)
 end
 
 local function shop()
-    local servers = {}
-    local req = game:HttpGet(string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100", game.PlaceId))
-    local body = game.HttpService:JSONDecode(req)
-    if body and body.data then
-        for i, v in next, body.data do
-            if type(v) == "table" and tonumber(v.playing) and tonumber(v.maxPlayers) and v.playing < v.maxPlayers and v.id ~= JobId then
-                table.insert(servers, 1, v.id)
-            end
+    --Made by Rafa#0069 ❤
+    local MINIMUM_PLAYERS = 1
+    local Players = game:GetService("Players")
+    local HttpService = game:GetService("HttpService")
+    local TeleportService = game:GetService("TeleportService")
+    local LocalPlayer = Players.LocalPlayer
+    local PlaceId = game.PlaceId
+    local fileName = string.format("%s_servers.json", tostring(PlaceId))
+    local ServerHopData = { 
+        CheckedServers = {},
+        LastTimeHop = nil,
+        CreatedAt = os.time()
+    }
+    if isfile(fileName) then
+        local fileContent = readfile(fileName)
+        ServerHopData = HttpService:JSONDecode(fileContent)
+    end
+    if ServerHopData.LastTimeHop then
+        print("Took", os.time() - ServerHopData.LastTimeHop, "seconds to server hop")
+    end
+    local ServerTypes = { ["Normal"] = "desc", ["Low"] = "asc" }
+    function Jump(serverType)
+        serverType = serverType or "Normal"
+        if not ServerTypes[serverType] then serverType = "Normal" end
+        local function GetServerList(cursor)
+            cursor = cursor and "&cursor=" .. cursor or ""
+            local API_URL = string.format('https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=%s&limit=100', tostring(PlaceId), ServerTypes[serverType])
+            return HttpService:JSONDecode(game:HttpGet(API_URL .. cursor))
         end
+        local currentPageCursor = nil
+        while true do 
+            local serverList = GetServerList(currentPageCursor)
+            currentPageCursor = serverList.nextPageCursor
+            for _, server in ipairs(serverList.data) do
+                if server.playing and tonumber(server.playing) >= MINIMUM_PLAYERS and tonumber(server.playing) < Players.MaxPlayers and not table.find(ServerHopData.CheckedServers, tostring(server.id)) then     
+                    ServerHopData.LastTimeHop = os.time()
+                    table.insert(ServerHopData.CheckedServers, server.id)
+                    writefile(fileName, HttpService:JSONEncode(ServerHopData))
+                    TeleportService:TeleportToPlaceInstance(PlaceId, server.id, LocalPlayer) 
+                    wait(0.25)
+                end
+            end
+            if not currentPageCursor then break else wait(0.25) end
+        end  
     end
-    if #servers > 0 then
-        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, servers[math.random(1, #servers)], game.Players.LocalPlayer)
-    end
+    Jump("Normal")
 end
 
 local ResetGameButtonButton = Instance.new("ImageButton")
@@ -41,7 +74,7 @@ local ResetGameButtonHint = Instance.new("ImageLabel")
 ResetGameButtonButton.Name = "ResetGameButtonButton"
 ResetGameButtonButton.Parent = game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("SettingsShield"):WaitForChild("SettingsShield"):WaitForChild("MenuContainer"):WaitForChild("BottomButtonFrame")
 ResetGameButtonButton.BackgroundTransparency = 1.000
-ResetGameButtonButton.Position = UDim2.new(0.15, -120, 0.5, 50)
+ResetGameButtonButton.Position = UDim2.new(0.85, -140, 0.5, 50)
 ResetGameButtonButton.Size = UDim2.new(0, 260, 0, 70)
 ResetGameButtonButton.ZIndex = 2
 ResetGameButtonButton.AutoButtonColor = false

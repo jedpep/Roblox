@@ -18,7 +18,7 @@ local function getcustomassetfunc(file)
 end
 
 local function shop()
-    --Made by Rafa#0069
+    --Made by Rafa#0069 ❤
     local MINIMUM_PLAYERS = 1
     local Players = game:GetService("Players")
     local HttpService = game:GetService("HttpService")
@@ -74,7 +74,7 @@ local ResetGameButtonHint = Instance.new("ImageLabel")
 ResetGameButtonButton.Name = "ResetGameButtonButton"
 ResetGameButtonButton.Parent = game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("SettingsShield"):WaitForChild("SettingsShield"):WaitForChild("MenuContainer"):WaitForChild("BottomButtonFrame")
 ResetGameButtonButton.BackgroundTransparency = 1.000
-ResetGameButtonButton.Position = UDim2.new(0.85, -140, 0.5, 50)
+ResetGameButtonButton.Position = UDim2.new(0.15, -120, 0.5, 50)
 ResetGameButtonButton.Size = UDim2.new(0, 260, 0, 70)
 ResetGameButtonButton.ZIndex = 2
 ResetGameButtonButton.AutoButtonColor = false
@@ -90,7 +90,7 @@ ResetGameButtonTextLabel.Position = UDim2.new(0.25, 0, 0, 0)
 ResetGameButtonTextLabel.Size = UDim2.new(0.75, 0, 0.899999976, 0)
 ResetGameButtonTextLabel.ZIndex = 2
 ResetGameButtonTextLabel.Font = Enum.Font.SourceSansBold
-ResetGameButtonTextLabel.Text = "Advanced Serverhop"
+ResetGameButtonTextLabel.Text = "Low Server"
 ResetGameButtonTextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 ResetGameButtonTextLabel.TextScaled = true
 ResetGameButtonTextLabel.TextSize = 24.000
@@ -101,7 +101,7 @@ UITextSizeConstraint.MaxTextSize = 24
 
 ResetGameButtonHint.Name = "ResetGameButtonHint"
 ResetGameButtonHint.Parent = ResetGameButtonButton
-ResetGameButtonHint.Image = getcustomassetfunc("AdvancedServerhopIcon.png")
+ResetGameButtonHint.Image = getcustomassetfunc("LowServerIcon.png")
 ResetGameButtonHint.AnchorPoint = Vector2.new(0.5, 0.5)
 ResetGameButtonHint.BackgroundTransparency = 1.000
 ResetGameButtonHint.Position = UDim2.new(0.150000006, 0, 0.474999994, 0)
