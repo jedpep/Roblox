@@ -47,7 +47,7 @@ ResetGameButtonTextLabel.Position = UDim2.new(0.25, 0, 0, 0)
 ResetGameButtonTextLabel.Size = UDim2.new(0.75, 0, 0.899999976, 0)
 ResetGameButtonTextLabel.ZIndex = 2
 ResetGameButtonTextLabel.Font = Enum.Font.SourceSansBold
-ResetGameButtonTextLabel.Text = "Rejoin"
+ResetGameButtonTextLabel.Text = "Serverhop"
 ResetGameButtonTextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 ResetGameButtonTextLabel.TextScaled = true
 ResetGameButtonTextLabel.TextSize = 24.000
@@ -58,7 +58,7 @@ UITextSizeConstraint.MaxTextSize = 24
 
 ResetGameButtonHint.Name = "ResetGameButtonHint"
 ResetGameButtonHint.Parent = ResetGameButtonButton
-ResetGameButtonHint.Image = getcustomassetfunc("RejoinIcon.png")
+ResetGameButtonHint.Image = getcustomassetfunc("ServerhopIcon.png")
 ResetGameButtonHint.AnchorPoint = Vector2.new(0.5, 0.5)
 ResetGameButtonHint.BackgroundTransparency = 1.000
 ResetGameButtonHint.Position = UDim2.new(0.150000006, 0, 0.474999994, 0)
