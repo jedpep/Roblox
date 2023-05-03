@@ -1,3 +1,5 @@
+repeat wait() until game:IsLoaded()
+
 function getScript(file)
     local ScriptPath = "Jedpep/CoreGui/scripts"
 
