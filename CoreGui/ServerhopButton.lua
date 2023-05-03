@@ -13,14 +13,27 @@ local function getcustomassetfunc(file)
     makefolder(AssetPath)
 	if not isfile(AssetPath..'/'..file) then
         print(2)
-        local req = requestfunc({
-			Url = ("https://raw.githubusercontent.com/jedpep/Roblox/main/CoreGui/assets/%s"):format(file),
-			Method = "GET"
-		})
-		writefile(AssetPath.."/"..file, req.Body)
+        local req = game:HttpGet(("https://raw.githubusercontent.com/jedpep/Roblox/main/CoreGui/assets/%s"):format(file))
+		writefile(AssetPath.."/"..file, req)
     end
     print(3)
 	return getasset(AssetPath..'/'..file)
+end
+
+local function shop()
+    local servers = {}
+    local req = game:HttpGet(string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100", game.PlaceId))
+    local body = game.HttpService:JSONDecode(req)
+    if body and body.data then
+        for i, v in next, body.data do
+            if type(v) == "table" and tonumber(v.playing) and tonumber(v.maxPlayers) and v.playing < v.maxPlayers and v.id ~= JobId then
+                table.insert(servers, 1, v.id)
+            end
+        end
+    end
+    if #servers > 0 then
+        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, servers[math.random(1, #servers)], game.Players.LocalPlayer)
+    end
 end
 
 local ResetGameButtonButton = Instance.new("ImageButton")
@@ -31,7 +44,7 @@ local ResetGameButtonHint = Instance.new("ImageLabel")
 ResetGameButtonButton.Name = "ResetGameButtonButton"
 ResetGameButtonButton.Parent = game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("SettingsShield"):WaitForChild("SettingsShield"):WaitForChild("MenuContainer"):WaitForChild("BottomButtonFrame")
 ResetGameButtonButton.BackgroundTransparency = 1.000
-ResetGameButtonButton.Position = UDim2.new(0.5, -130, 0.5, 50)
+ResetGameButtonButton.Position = UDim2.new(0.15, -120, 0.5, 50)
 ResetGameButtonButton.Size = UDim2.new(0, 260, 0, 70)
 ResetGameButtonButton.ZIndex = 2
 ResetGameButtonButton.AutoButtonColor = false
@@ -74,11 +87,5 @@ ResetGameButtonButton.MouseLeave:Connect(function()
 end)
 
 ResetGameButtonButton.MouseButton1Click:Connect(function()
-	game:GetService("TeleportService"):TeleportToPlaceInstance(game,PlaceId, game.JobId, game.Players.LocalPlayer)
-end)
-
-game:GetService("UserInputService").InputEnded:Connect(function(input)
-	if input.KeyCode == Enum.KeyCode.J and ResetGameButtonButton.Parent.Parent.Parent.Visible then 
-		game:GetService("TeleportService"):Teleport(game.PlaceId)
-	end
+	shop()
 end)

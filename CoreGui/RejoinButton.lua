@@ -13,11 +13,8 @@ local function getcustomassetfunc(file)
     makefolder(AssetPath)
 	if not isfile(AssetPath..'/'..file) then
         print(2)
-        local req = requestfunc({
-			Url = ("https://raw.githubusercontent.com/jedpep/Roblox/main/CoreGui/assets/%s"):format(file),
-			Method = "GET"
-		})
-		writefile(AssetPath.."/"..file, req.Body)
+        local req = game:HttpGet(("https://raw.githubusercontent.com/jedpep/Roblox/main/CoreGui/assets/%s"):format(file))
+		writefile(AssetPath.."/"..file, req)
     end
     print(3)
 	return getasset(AssetPath..'/'..file)
@@ -74,11 +71,5 @@ ResetGameButtonButton.MouseLeave:Connect(function()
 end)
 
 ResetGameButtonButton.MouseButton1Click:Connect(function()
-	game:GetService("TeleportService"):TeleportToPlaceInstance(game,PlaceId, game.JobId, game.Players.LocalPlayer)
-end)
-
-game:GetService("UserInputService").InputEnded:Connect(function(input)
-	if input.KeyCode == Enum.KeyCode.J and ResetGameButtonButton.Parent.Parent.Parent.Visible then 
-		game:GetService("TeleportService"):Teleport(game.PlaceId)
-	end
+	game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
 end)
