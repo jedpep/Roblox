@@ -1,9 +1,3 @@
-Settings = {
-    ServerhopButton         = true;
-    RejoinButton            = true;
-    AdvancedServerhopButton = true;
-}
-
 function getScript(file)
     local ScriptPath = "Jedpep/CoreGui/scripts"
 
