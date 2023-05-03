@@ -8,15 +8,12 @@ if syn then
 end
 local requestfunc = syn and syn.request or http and http.request or http_request or fluxus and fluxus.request or getgenv().request or request
 local function getcustomassetfunc(file)
-    print(1)
     makefolder(CoreGuiPath)
     makefolder(AssetPath)
 	if not isfile(AssetPath..'/'..file) then
-        print(2)
         local req = game:HttpGet(("https://raw.githubusercontent.com/jedpep/Roblox/main/CoreGui/assets/%s"):format(file))
 		writefile(AssetPath.."/"..file, req)
     end
-    print(3)
 	return getasset(AssetPath..'/'..file)
 end
 
