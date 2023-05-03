@@ -17,6 +17,55 @@ local function getcustomassetfunc(file)
 	return getasset(AssetPath..'/'..file)
 end
 
+local function shop()
+    --Made by Rafa#0069
+    local MINIMUM_PLAYERS = 1
+    local Players = game:GetService("Players")
+    local HttpService = game:GetService("HttpService")
+    local TeleportService = game:GetService("TeleportService")
+    local LocalPlayer = Players.LocalPlayer
+    local PlaceId = game.PlaceId
+    local fileName = string.format("%s_servers.json", tostring(PlaceId))
+    local ServerHopData = { 
+        CheckedServers = {},
+        LastTimeHop = nil,
+        CreatedAt = os.time()
+    }
+    if isfile(fileName) then
+        local fileContent = readfile(fileName)
+        ServerHopData = HttpService:JSONDecode(fileContent)
+    end
+    if ServerHopData.LastTimeHop then
+        print("Took", os.time() - ServerHopData.LastTimeHop, "seconds to server hop")
+    end
+    local ServerTypes = { ["Normal"] = "desc", ["Low"] = "asc" }
+    function Jump(serverType)
+        serverType = serverType or "Normal"
+        if not ServerTypes[serverType] then serverType = "Normal" end
+        local function GetServerList(cursor)
+            cursor = cursor and "&cursor=" .. cursor or ""
+            local API_URL = string.format('https://games.roblox.com/v1/games/%s/servers/Public?sortOrder=%s&limit=100', tostring(PlaceId), ServerTypes[serverType])
+            return HttpService:JSONDecode(game:HttpGet(API_URL .. cursor))
+        end
+        local currentPageCursor = nil
+        while true do 
+            local serverList = GetServerList(currentPageCursor)
+            currentPageCursor = serverList.nextPageCursor
+            for _, server in ipairs(serverList.data) do
+                if server.playing and tonumber(server.playing) >= MINIMUM_PLAYERS and tonumber(server.playing) < Players.MaxPlayers and not table.find(ServerHopData.CheckedServers, tostring(server.id)) then     
+                    ServerHopData.LastTimeHop = os.time()
+                    table.insert(ServerHopData.CheckedServers, server.id)
+                    writefile(fileName, HttpService:JSONEncode(ServerHopData))
+                    TeleportService:TeleportToPlaceInstance(PlaceId, server.id, LocalPlayer) 
+                    wait(0.25)
+                end
+            end
+            if not currentPageCursor then break else wait(0.25) end
+        end  
+    end
+    Jump("Low")
+end
+
 local ResetGameButtonButton = Instance.new("ImageButton")
 local ResetGameButtonTextLabel = Instance.new("TextLabel")
 local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
@@ -25,7 +74,7 @@ local ResetGameButtonHint = Instance.new("ImageLabel")
 ResetGameButtonButton.Name = "ResetGameButtonButton"
 ResetGameButtonButton.Parent = game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("SettingsShield"):WaitForChild("SettingsShield"):WaitForChild("MenuContainer"):WaitForChild("BottomButtonFrame")
 ResetGameButtonButton.BackgroundTransparency = 1.000
-ResetGameButtonButton.Position = UDim2.new(0.5, -130, 0.5, 50)
+ResetGameButtonButton.Position = UDim2.new(0.85, -140, 0.5, 50)
 ResetGameButtonButton.Size = UDim2.new(0, 260, 0, 70)
 ResetGameButtonButton.ZIndex = 2
 ResetGameButtonButton.AutoButtonColor = false
@@ -41,7 +90,7 @@ ResetGameButtonTextLabel.Position = UDim2.new(0.25, 0, 0, 0)
 ResetGameButtonTextLabel.Size = UDim2.new(0.75, 0, 0.899999976, 0)
 ResetGameButtonTextLabel.ZIndex = 2
 ResetGameButtonTextLabel.Font = Enum.Font.SourceSansBold
-ResetGameButtonTextLabel.Text = "Rejoin"
+ResetGameButtonTextLabel.Text = "Advanced Serverhop"
 ResetGameButtonTextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 ResetGameButtonTextLabel.TextScaled = true
 ResetGameButtonTextLabel.TextSize = 24.000
@@ -68,5 +117,5 @@ ResetGameButtonButton.MouseLeave:Connect(function()
 end)
 
 ResetGameButtonButton.MouseButton1Click:Connect(function()
-	game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
+	shop()
 end)
