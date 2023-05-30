@@ -81,8 +81,10 @@ local Lib = {} do
         setclipboard("https://github.com/jedpep/Roblox/tree/main/CoreGui/assets")
     end
 
-    Lib.CreateButton = function(ButtonText, Icon, callback)
-        print(ButtonText, Icon, callback)
+    Lib.CreateButton = function(params)
+        local ButtonText = params.ButtonText
+        local Icon = params.Icon
+        local callback = params.callback
         Lib.Storage.Buttons += 1
 
         local CoreGUIButton = Instance.new("ImageButton")
