@@ -14,7 +14,7 @@ end
 
 function latestVersion()
     local LatestVersion = game:HttpGet("https://raw.githubusercontent.com/jedpep/Roblox/main/CoreGui/assets/version")
-    return {(not isfile("Jedpep/CoreGui/version.txt")) or (readfile("Jedpep/CoreGui/version.txt") ~= LatestVersion), LatestVersion}
+    return {(isfile("Jedpep/CoreGui/version.txt")) or (readfile("Jedpep/CoreGui/version.txt") == LatestVersion), LatestVersion}
 end
 
 local IsLatestVersion = latestVersion()
