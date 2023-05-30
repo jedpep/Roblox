@@ -12,24 +12,18 @@ function getScript(file)
     return readfile(ScriptPath.."/"..file)
 end
 
-function version()
+function latestVersion()
     local LatestVersion = game:HttpGet("https://raw.githubusercontent.com/jedpep/Roblox/main/CoreGui/assets/version")
-
-    makefolder("Jedpep/CoreGui")
-    if not isfile("Jedpep/CoreGui/version.txt") then
-        delfolder("Jedpep/CoreGui/scripts")
-        delfolder("Jedpep/CoreGui/assets")
-        writefile("Jedpep/CoreGui/version.txt", LatestVersion)
-    else
-        if readfile("Jedpep/CoreGui/version.txt") ~= LatestVersion then
-            delfolder("Jedpep/CoreGui/scripts")
-            delfolder("Jedpep/CoreGui/assets")
-            writefile("Jedpep/CoreGui/version.txt", LatestVersion)
-        end
-    end
+    return {(readfile("Jedpep/CoreGui/version.txt") ~= LatestVersion) or (not isfile("Jedpep/CoreGui/version.txt")), LatestVersion}
 end
 
-version()
+local IsLatestVersion = latestVersion()
+if not IsLatestVersion[1] then
+    delfolder("Jedpep/CoreGui/scripts")
+    delfolder("Jedpep/CoreGui/assets")
+    writefile("Jedpep/CoreGui/version.txt", IsLatestVersion[2])
+end
+
 for N, S in next, Settings do
     if S then
         loadstring(getScript(N..".lua"))()
