@@ -71,6 +71,10 @@ local Lib = {} do
             end
             Jump(Mode)
         end
+
+        Lib.Utils.Rejoin = function()
+            game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
+        end
     end
 
     Lib.IconList = function()
@@ -88,7 +92,7 @@ local Lib = {} do
         CoreGUIButton.Name = "CoreGUIButton"..math.random(10000,99999)
         CoreGUIButton.Parent = game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("SettingsShield"):WaitForChild("SettingsShield"):WaitForChild("MenuContainer"):WaitForChild("BottomButtonFrame")
         CoreGUIButton.BackgroundTransparency = 1.000
-        CoreGUIButton.Position = UDim2.new(ROM[Lib.Storage.Buttons])
+        CoreGUIButton.Position = UDim2.new(ROM.Button_Positions[Lib.Storage.Buttons])
         CoreGUIButton.Size = UDim2.new(0, 260, 0, 70)
         CoreGUIButton.ZIndex = 2
         CoreGUIButton.AutoButtonColor = false
@@ -115,7 +119,7 @@ local Lib = {} do
 
         CoreGUIButtonHint.Name = "CoreGUIButtonHint"..math.random(10000,99999)
         CoreGUIButtonHint.Parent = CoreGUIButton
-        CoreGUIButtonHint.Image = getcustomassetfunc("ServerhopIcon.png")
+        CoreGUIButtonHint.Image = getcustomassetfunc(Icon)
         CoreGUIButtonHint.AnchorPoint = Vector2.new(0.5, 0.5)
         CoreGUIButtonHint.BackgroundTransparency = 1.000
         CoreGUIButtonHint.Position = UDim2.new(0.150000006, 0, 0.474999994, 0)
