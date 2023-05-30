@@ -14,11 +14,11 @@ end
 
 function latestVersion()
     local LatestVersion = game:HttpGet("https://raw.githubusercontent.com/jedpep/Roblox/main/CoreGui/assets/version")
-    return {(isfile("Jedpep/CoreGui/version.txt")) or (readfile("Jedpep/CoreGui/version.txt") == LatestVersion), LatestVersion}
+    return {(not isfile("Jedpep/CoreGui/version.txt")) or (readfile("Jedpep/CoreGui/version.txt") ~= LatestVersion), LatestVersion}
 end
 
 local IsLatestVersion = latestVersion()
-if not IsLatestVersion[1] then
+if IsLatestVersion[1] then
     delfolder("Jedpep/CoreGui/scripts")
     delfolder("Jedpep/CoreGui/assets")
     writefile("Jedpep/CoreGui/version.txt", IsLatestVersion[2])
