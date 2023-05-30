@@ -82,6 +82,7 @@ local Lib = {} do
     end
 
     Lib.CreateButton = function(ButtonText, Icon, callback)
+        print(ButtonText, Icon, callback)
         Lib.Storage.Buttons += 1
 
         local CoreGUIButton = Instance.new("ImageButton")
