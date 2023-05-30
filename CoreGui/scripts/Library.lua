@@ -81,7 +81,7 @@ local Lib = {} do
         setclipboard("https://github.com/jedpep/Roblox/tree/main/CoreGui/assets")
     end
 
-    Lib.CreateButton = function(Icon, callback)
+    Lib.CreateButton = function(ButtonText, Icon, callback)
         Lib.Storage.Buttons += 1
 
         local CoreGUIButton = Instance.new("ImageButton")
@@ -108,7 +108,7 @@ local Lib = {} do
         CoreGUITextLabel.Size = UDim2.new(0.75, 0, 0.899999976, 0)
         CoreGUITextLabel.ZIndex = 2
         CoreGUITextLabel.Font = Enum.Font.SourceSansBold
-        CoreGUITextLabel.Text = "Serverhop"
+        CoreGUITextLabel.Text = ButtonText
         CoreGUITextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
         CoreGUITextLabel.TextScaled = true
         CoreGUITextLabel.TextSize = 24.000
