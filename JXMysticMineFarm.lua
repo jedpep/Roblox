@@ -357,6 +357,7 @@ if (math.ceil(Library.FruitCmds.Get(game.Players.LocalPlayer, Library.FruitCmds.
     end
 
     local FarmingTime = os.time()
+    wait(10)
 
     local Worlds = settings.Fruits.Worlds
     function GetFruits()
