@@ -1,3 +1,10 @@
+--[[
+
+    this code isnt the best
+    bypasses or whatever made by rafa cuz im too retarded lmao
+
+]]--
+
 repeat wait() until game:IsLoaded()
 
 LPH_NO_VIRTUALIZE = function(E) return E end
