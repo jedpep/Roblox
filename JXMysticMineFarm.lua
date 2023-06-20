@@ -138,6 +138,7 @@ Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 Humanoid = Character:WaitForChild("Humanoid")
 HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
 
+-- thanks rafa
 local bypassSuccess, bypassError
 bypassSuccess, bypassError = pcall(function()
     if not Library.Network then 
@@ -149,8 +150,6 @@ bypassSuccess, bypassError = pcall(function()
     end
     
     hookfunction(debug.getupvalue(Library.Network.Invoke, 1), function(...) return true end)
-    -- Currently we don't need to hook Fire, since both Invoke/Fire have the same upvalue, this may change in future.
-    -- hookfunction(debug.getupvalue(Library.Network.Fire, 1), function(...) return true end)
     
     local originalPlay = Library.Audio.Play
     Library.Audio.Play = function(...) 
