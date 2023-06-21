@@ -1,13 +1,13 @@
 --[[
 
-    this code isnt the best
-    bypasses or whatever made by rafa cuz im too retarded lmao
+    half of this code is bad (the code that i made 🤓)
+
 
 ]]--
 
 repeat wait() until game:IsLoaded()
 
-LPH_NO_VIRTUALIZE = function(E) return E end
+LPH_NO_VIRTUALIZE = function(f) return f end
 
 if not game.PlaceId == 6284583030 or not game.PlaceId == 10321372166 then wait(9e9) end
 
