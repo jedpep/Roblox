@@ -122,6 +122,8 @@ bypassSuccess, bypassError = pcall(function()
 
 end)
 
+local SHU = loadstring(game:HttpGet("https://raw.githubusercontent.com/jedpep/Roblox/main/ServerHop.lua"))()
+
 if not bypassSuccess then
     print(bypassError)
     LocalPlayer:Kick("Error while bypassing network, try again or wait for an update!")
@@ -130,8 +132,10 @@ end
 
 if workspace.__MAP.Areas:FindFirstChild("SandcastleEventCannon") then
     if workspace.__MAP.Areas:FindFirstChild("SandcastleEventCannon"):FindFirstChild("Holographic Cannon") then
-        SHU.Jump(({"Normal","Low"})[math.random(1,2)])
-        wait(1000)
+        if not workspace.__MAP.Cannons:FindFirstChild("Sandcastle Event") then
+            SHU.Jump(({"Normal","Low"})[math.random(1,2)])
+            wait(1000)
+        end
     end
 end
 
@@ -144,7 +148,6 @@ end
 
 local x50 = false
 local x50Egg = nil
-local SHU = loadstring(game:HttpGet("https://raw.githubusercontent.com/jedpep/Roblox/main/ServerHop.lua"))()
 for i,v in pairs(workspace.__MAP.Eggs:GetChildren()) do
 	print(v.Sign.Main.SurfaceGui.Title.Text)
 	if v.Sign.Main.SurfaceGui.Title.Text:find(TargetMulti) then
