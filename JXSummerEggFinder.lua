@@ -163,6 +163,9 @@ else
         {
             ["color"] = 16230400,
             ["title"] = ("Found %s egg!"):format(TargetMulti),
+            ["author"] = {
+                ["name"] = ("Server size: %s/%s"):format(#game.Players:GetPlayers(), game.Players.MaxPlayers)
+            }
             ["description"] = ("Join script: ```lua\ngame:GetService('TeleportService'):TeleportToPlaceInstance(6284583030, '%s', game.Players.LocalPlayer)```\n\nJoin through browser: ```js\nRoblox.GameLauncher.joinGameInstance(6284583030, '%s')```"):format(game.JobId, game.JobId),
             ["footer"] = {
                 ["text"] = "JX Utilities • Sandcastle Egg Finder",
