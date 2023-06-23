@@ -132,7 +132,7 @@ if workspace.__MAP.Areas:FindFirstChild("SandcastleEventCannon") then
     if workspace.__MAP.Areas:FindFirstChild("SandcastleEventCannon"):FindFirstChild("Holographic Cannon") then
         SHU.Jump(({"Normal","Low"})[math.random(1,2)])
         wait(1000)
-    else
+    end
 end
 
 
