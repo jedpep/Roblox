@@ -1,9 +1,3 @@
-WebhookUrl    = "https://discord.com/api/webhooks/1121493274209820802/-Rv0ZeesU4uAUOF1a3WFVMQVgQvXUaV4ZOllAGbdMoaUZq8T3e73eTo9iE52ov70F80-"
-SendWebhook   = true
-StopWhenFound = false
-TeleportToEgg = false
-TargetMulti   = "50x" -- 1x, 2, 5x, 10x, 20x, 50x
-
 repeat wait() until game:IsLoaded()
 local Library = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"))
 while not Library.Loaded do
