@@ -1,3 +1,9 @@
+WebhookUrl    = "https://discord.com/api/webhooks/1121493274209820802/-Rv0ZeesU4uAUOF1a3WFVMQVgQvXUaV4ZOllAGbdMoaUZq8T3e73eTo9iE52ov70F80-"
+SendWebhook   = true
+StopWhenFound = false
+TeleportToEgg = false
+TargetMulti   = "50x" -- 1x, 2, 5x, 10x, 20x, 50x
+
 repeat wait() until game:IsLoaded()
 local Library = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"))
 while not Library.Loaded do
@@ -164,9 +170,9 @@ else
             ["color"] = 16230400,
             ["title"] = ("Found %s egg!"):format(TargetMulti),
             ["author"] = {
-                ["name"] = ("Server size: %s/%s"):format(#game.Players:GetChildren(), game.Players.MaxPlayers)
+                ["name"] = ("Server size: %s/%s"):format(#game.Players:GetChildren()-1, game.Players.MaxPlayers)
             },
-            ["description"] = ("Join script: ```lua\ngame:GetService('TeleportService'):TeleportToPlaceInstance(6284583030, '%s', game.Players.LocalPlayer)```\n\nJoin through browser: ```js\nRoblox.GameLauncher.joinGameInstance(6284583030, '%s')```"):format(game.JobId, game.JobId),
+            ["description"] = ("Join script: ```lua\ngame:GetService('TeleportService'):TeleportToPlaceInstance(%s, '%s', game.Players.LocalPlayer)```\n\nJoin through browser: ```js\nRoblox.GameLauncher.joinGameInstance(%s, '%s')```"):format(game.PlaceId, game.JobId, game.PlaceId, game.JobId),
             ["footer"] = {
                 ["text"] = "JX Utilities • Sandcastle Egg Finder",
                 ["icon_url"] = "https://media.discordapp.net/attachments/1108132899431137300/1109902689996910622/gpfp.png?width=675&height=675"
