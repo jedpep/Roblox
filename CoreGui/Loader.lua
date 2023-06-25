@@ -19,6 +19,8 @@ end
 
 local IsLatestVersion = latestVersion()
 if IsLatestVersion[1] then
+    makefolder("Jedpep/CoreGui/scripts")
+    makefolder("Jedpep/CoreGui/assets")
     delfolder("Jedpep/CoreGui/scripts")
     delfolder("Jedpep/CoreGui/assets")
     writefile("Jedpep/CoreGui/version.txt", IsLatestVersion[2])
