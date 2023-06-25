@@ -130,18 +130,15 @@ if not bypassSuccess then
     return
 end
 
-if workspace.__MAP.Areas:FindFirstChild("SandcastleEventCannon") then
-    if workspace.__MAP.Areas:FindFirstChild("SandcastleEventCannon"):FindFirstChild("Holographic Cannon") then
-        if not workspace.__MAP.Cannons:FindFirstChild("Sandcastle Event") then
-            SHU.Jump(({"Normal","Low"})[math.random(1,2)])
-            wait(1000)
-        end
-    end
+
+if not workspace.__MAP.Cannons:FindFirstChild("Summer Event") then
+    SHU.Jump(({"Normal","Low"})[math.random(1,2)])
+    wait(1000)
 end
 
 
-if Library.WorldCmds.Get() ~= "Sandcastle Event" then
-    Library.WorldCmds.Load("Sandcastle Event")
+if Library.WorldCmds.Get() ~= "Summer Islands Event" then
+    Library.WorldCmds.Load("Summer Islands Event")
     print(Library.WorldCmds.HasLoaded())
 end
 
@@ -168,7 +165,7 @@ else
             },
             ["description"] = ("Join script: ```lua\ngame:GetService('TeleportService'):TeleportToPlaceInstance(%s, '%s', game.Players.LocalPlayer)```\n\nJoin through browser: ```js\nRoblox.GameLauncher.joinGameInstance(%s, '%s')```"):format(game.PlaceId, game.JobId, game.PlaceId, game.JobId),
             ["footer"] = {
-                ["text"] = "JX Utilities • Sandcastle Egg Finder",
+                ["text"] = "JX Utilities • Summer Islands Egg Finder",
                 ["icon_url"] = "https://media.discordapp.net/attachments/1108132899431137300/1109902689996910622/gpfp.png?width=675&height=675"
             },
         }
