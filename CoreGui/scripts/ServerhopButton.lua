@@ -72,7 +72,7 @@ local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
 local ResetGameButtonHint = Instance.new("ImageLabel")
 
 ResetGameButtonButton.Name = "ResetGameButtonButton"
-ResetGameButtonButton.Parent = game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("SettingsShield"):WaitForChild("SettingsShield"):WaitForChild("MenuContainer"):WaitForChild("BottomButtonFrame")
+ResetGameButtonButton.Parent = game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("SettingsClippingShield"):WaitForChild("SettingsShield"):WaitForChild("MenuContainer"):WaitForChild("BottomButtonFrame")
 ResetGameButtonButton.BackgroundTransparency = 1.000
 ResetGameButtonButton.Position = UDim2.new(0.85, -140, 0.5, 50)
 ResetGameButtonButton.Size = UDim2.new(0, 260, 0, 70)
