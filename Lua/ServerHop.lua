@@ -41,7 +41,16 @@ local S = {} do
                 end
             end
             if not currentPageCursor then break else wait(0.25) end
-        end  
+        end
+
+        local ServerHopData = { 
+            CheckedServers = {},
+            LastTimeHop = nil,
+            CreatedAt = os.time()
+        }
+        writefile(fileName, HttpService:JSONEncode(ServerHopData))
+
+        S.Jump(serverType)
     end
 end
 
