@@ -54,6 +54,7 @@ local S = {} do
             S.Jump(serverType)
         end)
         if error then
+            task.wait(10)
             S.Jump(serverType)
         end
     end
